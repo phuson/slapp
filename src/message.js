@@ -27,6 +27,7 @@ class Message {
     this.body = body || {}
     this.meta = meta || {}
     this.makeThreaded = null
+    this.fnKey = null
     this.conversation_id = [
       this.meta.team_id,
       this.meta.channel_id || 'nochannel',
@@ -69,6 +70,8 @@ class Message {
    * @api private
    */
   attachOverrideRoute (fnKey, state) {
+    this.fnKey = fnKey;
+
     let fn = this._slapp.getRoute(fnKey)
 
     // TODO: should we bubble up if a function doesn't exist?
